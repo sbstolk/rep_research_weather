@@ -39,5 +39,17 @@ colnames(totalProp) <- c("Event", "Property_Damage")
 totalProp <- totalProp[order(totalProp$Property_Damage, decreasing=TRUE),]
 head(totalProp)
 ```
+The table shows that tornados cause the most economic damage, followed by flash floods and high winds associated with thunderstorms. 
+```{r}
+                Event Property_Damage
+334           TORNADO       3212258.2
+51        FLASH FLOOD       1420124.6
+348         TSTM WIND       1335965.6
+64              FLOOD        899938.5
+296 THUNDERSTORM WIND        876844.2
+106              HAIL        688693.4
+```
+
+Public health damage from severe weather events is shown in the following table. 
 
 
