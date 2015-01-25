@@ -32,14 +32,14 @@ harmData <- rbind(fatalData, injuryData)
 
 **Results**
 ##
-The following is a table of results for economic damage by severe weather event.
+The following is a table of results for property damage by severe weather event.
 ```{r}
 totalProp <- aggregate(propData$PROPDMG, by=list(propData$EVTYPE), FUN=sum)
 colnames(totalProp) <- c("Event", "Property_Damage")
 totalProp <- totalProp[order(totalProp$Property_Damage, decreasing=TRUE),]
 head(totalProp)
 ```
-The table shows that tornados cause the most economic damage, followed by flash floods and high winds associated with thunderstorms. 
+The table shows that tornados cause the most property damage, followed by flash floods and high winds associated with thunderstorms. 
 ```{r}
 #                Event Property_Damage
 #334           TORNADO       3212258.2
@@ -49,7 +49,56 @@ The table shows that tornados cause the most economic damage, followed by flash 
 #296 THUNDERSTORM WIND        876844.2
 #106              HAIL        688693.4
 ```
+The economic damage also includes damage to crops, as shown in the following table. 
+```{r}
+> totalCrop <- aggregate(cropData$CROPDMG, by=list(cropData$EVTYPE), FUN=sum)
+> colnames(totalCrop) <- c("Event", "Crop_Damage")
+> totalCrop <- totalCrop[order(totalCrop$Crop_Damage, decreasing=TRUE),]
+> head(totalCrop)
+```
+The most damaging weather event is hail, followed by flash floods and floods. 
 
-Public health damage from severe weather events is shown in the following table. 
+```{r}
+#                Event Crop_Damage
+#42               HAIL   579596.28
+#23        FLASH FLOOD   179200.46
+#27              FLOOD   168037.88
+#115         TSTM WIND   109202.60
+#107           TORNADO   100018.52
+#94  THUNDERSTORM WIND    66791.45
+```
 
-
+Fatalities from severe weather events is shown in the following table. 
+```{r}
+totalFatal <- aggregate(fatalData$FATALITIES, by=list(fatalData$EVTYPE), FUN=sum)
+colnames(totalFatal) <- c("Event", "Fatalities")
+totalFatal <- totalFatal[order(totalFatal$Fatalities, decreasing=TRUE),]
+head(totalFatal)
+```
+Tornados, high heat, and flash floods are the events responsible for the greatest number of fatalities. 
+```{r}
+#             Event Fatalities
+#141        TORNADO       5633
+#26  EXCESSIVE HEAT       1903
+#35     FLASH FLOOD        978
+#57            HEAT        937
+#97       LIGHTNING        816
+#145      TSTM WIND        504
+```
+Injuries from severe weather events are shown here. 
+```{r}
+totalInjury <- aggregate(injuryData$INJURIES, by=list(injuryData$EVTYPE), FUN=sum)
+colnames(totalInjury) <- c("Event", "Injuries")
+totalInjury <- totalInjury[order(totalInjury$Injuries, decreasing=TRUE),]
+head(totalInjury)
+```
+The highest number of injuries are caused by tornados, followed by floods and thunderstorm winds. 
+```{r}
+#             Event Injuries
+#129        TORNADO    91346
+#135      TSTM WIND     6957
+#30           FLOOD     6789
+#20  EXCESSIVE HEAT     6525
+#85       LIGHTNING     5230
+#47            HEAT     2100
+```
