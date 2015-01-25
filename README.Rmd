@@ -102,3 +102,4 @@ The highest number of injuries are caused by tornados, followed by floods and th
 #85       LIGHTNING     5230
 #47            HEAT     2100
 ```
+
