@@ -1,0 +1,32 @@
+---
+title: "stormdata"
+author: "sstolk"
+date: "25 January 2015"
+output: html_document
+---
+**Synopsis**
+The goal of this analysis is to identify the types of severe weather events that cause the most economic damage and the most damage to public health. For the analysis, data on crop damage, property damage, injuries and fatalities caused by types of severe weather events. This data was collected by the National Weather Service.
+
+**Data Processing**
+The first step was to load the target data into R. 
+```{r}
+stormdata <- read.csv("./repdata_data_StormData.csv")
+head(stormdata)
+head(unique(stormdata$EVTYPE))
+```
+This shows the key fields to be used in assessing harm caused by severe weather events. In accordance with the analysis described above, these can be divided into economic damage and population health damage. Crop damage and property damage will be classed as economic damage, while fatalities and injuries will be classed as population health damage. 
+To create a table of the economic damage data:
+```{r}
+propData <- subset(stormdata, subset=stormdata$PROPDMG>0)
+cropData <- subset(stormdata, subset=stormdata$CROPDMG>0)
+econData <- rbind(propData, cropData)
+```
+To create a table of to population health damage data:
+```{r}
+fatalData <- subset(stormdata, subset=stormdata$FATALITIES>0)
+injuryData <- subset(stormdata, subset=stormdata$INJURIES>0)
+harmData <- rbind(fatalData, injuryData)
+```
+
+**Results**
+The following is a table of results for economic damage by severe weather event
